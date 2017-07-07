@@ -1,11 +1,16 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <conio.h>
 #include <cstdlib>
 #include <time.h>
-#include <windows.h>
+
 using namespace std;
+
+void sleep( int milliseconds ) {
+	clock_t koniec_czekania;
+    koniec_czekania = clock() + milliseconds / 1000 * CLOCKS_PER_SEC;
+    while( clock() < koniec_czekania ) { }
+}
 
 int losuj_typ_reakcji()
 {
@@ -39,20 +44,20 @@ int main()
 		getline(cin, input);
 		if(input=="cze")
 		{
-			Sleep(los_t());
+			sleep(los_t());
 			cout<<endl<<"Dzoj: cze";
 			continue;
 		}
 		else if(input=="wal sie")
 		{
-			Sleep(los_t());
+			sleep(los_t());
 			cout<<endl<<"Dzoj: ty sie wal bardziej";
 			wkurzenie+=1;
 			continue;
 		}
 		else if(input=="k?")
 		{
-			Sleep(los_t());
+			sleep(los_t());
 			srand(time(NULL));
 			int los_k = rand()%8; //losuje liczbe od 0 do 8, czyli 9 liczb
 			if(los_k<=1) //dwie dziewiate szans na odpowiedz k
@@ -76,7 +81,7 @@ int main()
 				typ_reakcji=1;
 			}
 		}
-		Sleep(los_t());
+		sleep(los_t());
 		if(typ_reakcji==0) //jesli dzoj odpowiada normalnie
 		{
 			reakcje.open("reakcje.txt", ios::in); //plik - wejscie
@@ -172,6 +177,6 @@ int main()
 	}
 	while(wkurzenie<2);
 	cout<<"\n\n[Uzytkownik sie obrazil]";
-	getch();
+	cin.get();
 	return 0;
 }
